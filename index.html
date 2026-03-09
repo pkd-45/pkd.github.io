@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PKD | Research Website</title>
+  <meta name="description" content="Pratyush Kumar Das - researcher and problem-solver building data-driven projects, scientific tools, and clear visual communication." />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+/* =========================================================
+       GLOBAL FONT SIZE TWEAK (slightly larger overall)
+       ========================================================= */
+    html {
+      font-size: 17px;
+      min-height: 100%;
+      background: #071018 !important;
+    }
+
+    body {
+      line-height: 1.55;
+      min-height: 100%;
+      background: transparent !important;
+      position: relative;
+    }
+
+    /* =========================================================
+       PAGE BACKGROUND
+       (implemented via .page-bg div to avoid fixed-gradient tiling bugs)
+       ========================================================= */.main-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Slightly improve readability globally */
+    .card p,
+    .award-body p,
+    .pub-summary,
+    .edu-body p,
+    .about-text-flow p,
+    .small-note {
+      font-size: 0.98rem;
+    }
+
+    /* =========================================================
+       GLOBAL BACKGROUND SPACE DOTS (all tabs)
+       ========================================================= */
+    .space-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .space-dot {
+      position: absolute;
+      bottom: -30px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(180, 220, 255, 0.22);
+      box-shadow: 0 0 8px rgba(180, 220, 255, 0.12);
+      animation-name: driftUp;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 1;
+    }
+
+    .space-dot.s1  { left: 4%;  width: 2px; height: 2px; animation-duration: 15s; animation-delay: -4s; }
+    .space-dot.s2  { left: 7%;  width: 2px; height: 4px; animation-duration: 18s; animation-delay: -6s; }
+    .space-dot.s3  { left: 11%; width: 3px; height: 3px; animation-duration: 26s; animation-delay: -11s; }
+    .space-dot.s4 { left: 14%; width: 2px; height: 2px; animation-duration: 20s; animation-delay: -9s; }
+    .space-dot.s5  { left: 19%; width: 2px; height: 2px; animation-duration: 13s; animation-delay: -2s; }
+    .space-dot.s6  { left: 23%; width: 3px; height: 3px; animation-duration: 28s; animation-delay: -15s; }
+    .space-dot.s7  { left: 29%; width: 4px; height: 4px; animation-duration: 31s; animation-delay: -17s; }
+    .space-dot.s8  { left: 33%; width: 3px; height: 3px; animation-duration: 24s; animation-delay: -8s; }
+    .space-dot.s9  { left: 40%; width: 2px; height: 2px; animation-duration: 18s; animation-delay: -14s; }
+    .space-dot.s10 { left: 48%; width: 3px; height: 3px; animation-duration: 22s; animation-delay: -6s; }
+    .space-dot.s11 { left: 53%; width: 2px; height: 2px; animation-duration: 30s; animation-delay: -19s; }
+    .space-dot.s12 { left: 60%; width: 3px; height: 3px; animation-duration: 25s; animation-delay: -9s; }
+    .space-dot.s13 { left: 68%; width: 2px; height: 2px; animation-duration: 17s; animation-delay: -13s; }
+    .space-dot.s14 { left: 72%; width: 3px; height: 3px; animation-duration: 27s; animation-delay: -16s; }
+    .space-dot.s15 { left: 78%; width: 2px; height: 4px; animation-duration: 19s; animation-delay: -7s; }
+    .space-dot.s16 { left: 84%; width: 3px; height: 3px; animation-duration: 23s; animation-delay: -12s; }
+    .space-dot.s17 { left: 91%; width: 2px; height: 2px; animation-duration: 16s; animation-delay: -4s; }
+    .space-dot.s18 { left: 95%; width: 3px; height: 3px; animation-duration: 26s; animation-delay: -10s; }
+
+
+    .space-dot.s2, .space-dot.s5, .space-dot.s8 { animation-name: driftUpLeft; }
+    .space-dot.s3, .space-dot.s6, .space-dot.s9 { animation-name: driftUpRight; }
+
+    @keyframes driftUp {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(0, -115vh, 0); }
+    }
+
+    @keyframes driftUpLeft {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-10px, -115vh, 0); }
+    }
+
+    @keyframes driftUpRight {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(10px, -115vh, 0); }
+    }
+
+    /* Keep page content above background */
+    .site-header,
+    .main-content,
+    .site-footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =========================================================
+       HOME-ONLY STYLING
+       ========================================================= */
+    .home-hero {
+      min-height: 74vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 0.5rem;
+    }
+
+    .home-copy {
+      max-width: 680px;
+      animation: textFadeUp 900ms ease-out both;
+      animation-delay: 120ms;
+    }
+
+    .home-copy h1 {
+      margin: 0 0 0.75rem 0;
+      line-height: 1.1;
+      font-size: clamp(2.15rem, 4vw, 3.15rem);
+      letter-spacing: -0.02em;
+      animation: textFadeUp 900ms ease-out both;
+      animation-delay: 180ms;
+    }
+
+    .home-copy .intro-line {
+      font-size: 1.12rem;
+      opacity: 0.95;
+      margin: 0 0 0.9rem 0;
+      font-weight: 500;
+      position: relative;
+      display: inline-block;
+      animation: textFadeUp 900ms ease-out both;
+      animation-delay: 280ms;
+    }
+
+    .home-copy .intro-line::after {
+      content: "";
+      display: block;
+      height: 2px;
+      margin-top: 0.45rem;
+      width: 100%;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        rgba(120,210,255,0.0) 0%,
+        rgba(120,210,255,0.35) 20%,
+        rgba(120,210,255,0.75) 50%,
+        rgba(120,210,255,0.35) 80%,
+        rgba(120,210,255,0.0) 100%
+      );
+      background-size: 220% 100%;
+      animation: lineSweep 7s ease-in-out infinite;
+      opacity: 0.85;
+    }
+
+    .home-copy p {
+      margin: 0.5rem 0;
+      line-height: 1.65;
+      opacity: 0.92;
+      max-width: 60ch;
+      font-size: 1.02rem;
+    }
+
+    .home-copy > p:not(.intro-line) {
+      animation: textFadeUp 900ms ease-out both;
+      animation-delay: 380ms;
+      position: relative;
+    }
+
+    .home-copy > p:not(.intro-line)::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        100deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.03) 35%,
+        rgba(120,210,255,0.06) 50%,
+        rgba(255,255,255,0.03) 65%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: translateX(-120%);
+      animation: textShimmer 10s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: 6px;
+    }
+
+    .home-visual {
+      display: grid;
+      place-items: center;
+      animation: fadeInSoft 1200ms ease-out both;
+      animation-delay: 220ms;
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .hero-photo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(80, 160, 255, 0.18) 0%,
+        rgba(80, 160, 255, 0.07) 55%,
+        rgba(80, 160, 255, 0.00) 80%
+      );
+      filter: blur(10px);
+      z-index: 0;
+      animation: pulseGlow 7s ease-in-out infinite;
+    }
+
+    .profile-photo {
+      width: 290px;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+      position: relative;
+      z-index: 2;
+      border: 3px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.30);
+      background: #111;
+      animation: photoFloat 8s ease-in-out infinite;
+    }
+
+    .photo-placeholder {
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 0.9rem;
+      position: relative;
+      z-index: 2;
+      border: 2px dashed rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.03);
+      color: inherit;
+      box-sizing: border-box;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.20);
+      animation: photoFloat 8s ease-in-out infinite;
+    }
+
+    .photo-placeholder p {
+      margin: 0.35rem 0 0;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .photo-placeholder code {
+      font-size: 0.78rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .center-halo {
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      z-index: 1;
+      pointer-events: none;
+      animation: haloBreath 9s ease-in-out infinite;
+    }
+
+    /* CONTACT (plain, no cards) */
+    .contact-plain {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0.5rem 0.35rem 0.25rem;
+    }
+
+    .contact-plain h2 {
+      margin: 0 0 0.4rem 0;
+      font-size: clamp(1.4rem, 2vw, 1.9rem);
+      line-height: 1.15;
+    }
+
+    .contact-plain .small-note {
+      margin: 0 0 0.95rem 0;
+      opacity: 0.85;
+    }
+
+    .contact-plain-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .contact-plain-list li {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 1.03rem;
+    }
+
+    .contact-plain-list li strong {
+      opacity: 0.9;
+      font-weight: 600;
+    }
+
+    .contact-plain-list a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .contact-plain-list a:hover {
+      color: rgba(170,230,255,1);
+      border-bottom-color: rgba(170,230,255,0.5);
+    }
+
+    /* EDUCATION: force single-column stack */
+    .edu-grid {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+    }
+
+    #education .grid.two {
+      grid-template-columns: 1fr !important;
+    }
+
+    #education .edu-card {
+      width: 100%;
+    }
+
+    /* Skills links inside tag pills */
+    .skills-block .tags span a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .skills-block .tags span a:hover {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    @keyframes textFadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInSoft {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes lineSweep {
+      0%, 100% { background-position: 120% 0; opacity: 0.65; }
+      50%      { background-position: -20% 0; opacity: 0.95; }
+    }
+
+    @keyframes textShimmer {
+      0%, 82%, 100% { transform: translateX(-120%); opacity: 0; }
+      86%           { opacity: 1; }
+      94%           { transform: translateX(120%); opacity: 1; }
+      98%           { opacity: 0; }
+    }
+
+    @keyframes haloBreath {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50%      { transform: scale(1.015); opacity: 1; }
+    }
+
+    @keyframes photoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-3px); }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px) {
+      .home-hero {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+        min-height: 68vh;
+        padding-top: 1.25rem;
+      }
+
+      .home-copy {
+        max-width: 100%;
+        order: 2;
+      }
+
+      .home-copy p,
+      .home-copy .intro-line {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .home-copy .intro-line {
+        display: inline-block;
+      }
+
+      .home-visual {
+        order: 1;
+      }
+
+      .hero-photo-wrap {
+        width: 260px;
+        height: 260px;
+      }
+
+      .profile-photo,
+      .photo-placeholder {
+        width: 160px;
+        height: 160px;
+      }
+
+      .center-halo {
+        width: 195px;
+        height: 195px;
+      }
+
+      .space-dot {
+        opacity: 0.85;
+      }
+
+      .contact-plain-list li {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .space-dot,
+      .hero-photo-wrap::before,
+      .center-halo,
+      .profile-photo,
+      .photo-placeholder,
+      .home-copy,
+      .home-copy h1,
+      .home-copy .intro-line,
+      .home-copy > p:not(.intro-line),
+      .home-copy .intro-line::after,
+      .home-copy > p:not(.intro-line)::after {
+        animation: none !important;
+      }
+
+      .home-copy > p:not(.intro-line)::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+<!-- Global faint moving background dots -->
+  <div class="space-bg" aria-hidden="true">
+        <span class="space-dot" style="left:27.64%; width:4px; height:4px; animation-name:driftUpLeft; animation-duration:22s; animation-delay:-2s; opacity:0.7; --glow:0.06;"></span>
+    <span class="space-dot" style="left:2.08%; width:2px; height:2px; animation-name:driftUpRight; animation-duration:17s; animation-delay:-9s; opacity:0.84; --glow:0.15;"></span>
+    <span class="space-dot" style="left:7.53%; width:2px; height:2px; animation-name:driftUpRight; animation-duration:18s; animation-delay:-6s; opacity:0.74; --glow:0.12;"></span>
+    <span class="space-dot" style="left:14.99%; width:1px; height:1px; animation-name:driftUpLeft; animation-duration:15s; animation-delay:-5s; opacity:0.66; --glow:0.14;"></span>
+    <span class="space-dot" style="left:95.34%; width:1px; height:1px; animation-name:driftUp; animation-duration:27s; animation-delay:-2s; opacity:0.89; --glow:0.08;"></span>
+    <span class="space-dot" style="left:38.9%; width:2px; height:2px; animation-name:driftUp; animation-duration:32s; animation-delay:-21s; opacity:0.77; --glow:0.09;"></span>
+    <span class="space-dot" style="left:21.55%; width:2px; height:2px; animation-name:driftUp; animation-duration:34s; animation-delay:0s; opacity:0.77; --glow:0.12;"></span>
+    <span class="space-dot" style="left:29.79%; width:3px; height:3px; animation-name:driftUp; animation-duration:26s; animation-delay:-12s; opacity:0.81; --glow:0.11;"></span>
+    <span class="space-dot" style="left:55.89%; width:1px; height:1px; animation-name:driftUp; animation-duration:30s; animation-delay:-19s; opacity:0.83; --glow:0.11;"></span>
+    <span class="space-dot" style="left:62.77%; width:2px; height:2px; animation-name:driftUp; animation-duration:24s; animation-delay:-9s; opacity:0.63; --glow:0.12;"></span>
+    <span class="space-dot" style="left:5.88%; width:1px; height:1px; animation-name:driftUpRight; animation-duration:14s; animation-delay:-19s; opacity:0.87; --glow:0.12;"></span>
+    <span class="space-dot" style="left:45.58%; width:2px; height:2px; animation-name:driftUp; animation-duration:24s; animation-delay:-8s; opacity:0.84; --glow:0.11;"></span>
+    <span class="space-dot" style="left:66.0%; width:4px; height:4px; animation-name:driftUp; animation-duration:14s; animation-delay:-4s; opacity:0.82; --glow:0.08;"></span>
+    <span class="space-dot" style="left:48.0%; width:2px; height:2px; animation-name:driftUp; animation-duration:33s; animation-delay:-6s; opacity:0.95; --glow:0.06;"></span>
+    <span class="space-dot" style="left:13.96%; width:3px; height:3px; animation-name:driftUp; animation-duration:33s; animation-delay:-5s; opacity:0.85; --glow:0.12;"></span>
+    <span class="space-dot" style="left:70.4%; width:3px; height:3px; animation-name:driftUpLeft; animation-duration:34s; animation-delay:-8s; opacity:0.89; --glow:0.15;"></span>
+    <span class="space-dot" style="left:16.96%; width:1px; height:1px; animation-name:driftUpRight; animation-duration:16s; animation-delay:-10s; opacity:0.84; --glow:0.16;"></span>
+    <span class="space-dot" style="left:41.66%; width:3px; height:3px; animation-name:driftUpRight; animation-duration:25s; animation-delay:-14s; opacity:0.65; --glow:0.15;"></span>
+    <span class="space-dot" style="left:39.39%; width:1px; height:1px; animation-name:driftUp; animation-duration:27s; animation-delay:-18s; opacity:0.94; --glow:0.12;"></span>
+    <span class="space-dot" style="left:90.79%; width:1px; height:1px; animation-name:driftUp; animation-duration:21s; animation-delay:-18s; opacity:0.95; --glow:0.06;"></span>
+    <span class="space-dot" style="left:9.37%; width:3px; height:3px; animation-name:driftUpLeft; animation-duration:32s; animation-delay:-20s; opacity:0.92; --glow:0.15;"></span>
+    <span class="space-dot" style="left:79.7%; width:3px; height:3px; animation-name:driftUpRight; animation-duration:32s; animation-delay:-1s; opacity:0.9; --glow:0.16;"></span>
+    <span class="space-dot" style="left:46.37%; width:3px; height:3px; animation-name:driftUpLeft; animation-duration:32s; animation-delay:-1s; opacity:0.66; --glow:0.09;"></span>
+    <span class="space-dot" style="left:9.16%; width:2px; height:2px; animation-name:driftUp; animation-duration:16s; animation-delay:-17s; opacity:0.72; --glow:0.07;"></span>
+    <span class="space-dot" style="left:40.82%; width:2px; height:2px; animation-name:driftUpRight; animation-duration:16s; animation-delay:-18s; opacity:0.9; --glow:0.1;"></span>
+    <span class="space-dot" style="left:57.88%; width:1px; height:1px; animation-name:driftUp; animation-duration:31s; animation-delay:-21s; opacity:0.83; --glow:0.14;"></span>
+    <span class="space-dot" style="left:97.51%; width:1px; height:1px; animation-name:driftUpLeft; animation-duration:18s; animation-delay:-20s; opacity:0.67; --glow:0.15;"></span>
+    <span class="space-dot" style="left:66.6%; width:2px; height:2px; animation-name:driftUpRight; animation-duration:33s; animation-delay:-18s; opacity:0.7; --glow:0.11;"></span>
+    <span class="space-dot" style="left:91.51%; width:3px; height:3px; animation-name:driftUp; animation-duration:21s; animation-delay:0s; opacity:0.6; --glow:0.11;"></span>
+    <span class="space-dot" style="left:83.64%; width:1px; height:1px; animation-name:driftUpRight; animation-duration:33s; animation-delay:-13s; opacity:0.7; --glow:0.1;"></span>
+    <span class="space-dot" style="left:62.48%; width:2px; height:2px; animation-name:driftUp; animation-duration:22s; animation-delay:-8s; opacity:0.91; --glow:0.15;"></span>
+    <span class="space-dot" style="left:13.33%; width:2px; height:2px; animation-name:driftUp; animation-duration:21s; animation-delay:-23s; opacity:0.9; --glow:0.07;"></span>
+    <span class="space-dot" style="left:60.44%; width:4px; height:4px; animation-name:driftUpRight; animation-duration:17s; animation-delay:-2s; opacity:0.78; --glow:0.1;"></span>
+    <span class="space-dot" style="left:19.99%; width:3px; height:3px; animation-name:driftUp; animation-duration:18s; animation-delay:-13s; opacity:0.89; --glow:0.14;"></span>
+    <span class="space-dot" style="left:49.25%; width:2px; height:2px; animation-name:driftUpLeft; animation-duration:27s; animation-delay:-6s; opacity:0.63; --glow:0.08;"></span>
+    <span class="space-dot" style="left:64.37%; width:3px; height:3px; animation-name:driftUp; animation-duration:15s; animation-delay:-3s; opacity:0.82; --glow:0.13;"></span>
+    <span class="space-dot" style="left:49.96%; width:4px; height:4px; animation-name:driftUpLeft; animation-duration:25s; animation-delay:-4s; opacity:0.57; --glow:0.13;"></span>
+    <span class="space-dot" style="left:57.21%; width:2px; height:2px; animation-name:driftUpLeft; animation-duration:19s; animation-delay:-17s; opacity:0.57; --glow:0.15;"></span>
+    <span class="space-dot" style="left:80.3%; width:2px; height:2px; animation-name:driftUpRight; animation-duration:24s; animation-delay:-18s; opacity:0.68; --glow:0.06;"></span>
+    <span class="space-dot" style="left:83.42%; width:1px; height:1px; animation-name:driftUpRight; animation-duration:26s; animation-delay:-12s; opacity:0.99; --glow:0.15;"></span>
+    <span class="space-dot" style="left:28.88%; width:1px; height:1px; animation-name:driftUpLeft; animation-duration:19s; animation-delay:-13s; opacity:0.89; --glow:0.07;"></span>
+    <span class="space-dot" style="left:62.17%; width:4px; height:4px; animation-name:driftUpRight; animation-duration:26s; animation-delay:-19s; opacity:0.93; --glow:0.13;"></span>
+    <span class="space-dot" style="left:97.81%; width:2px; height:2px; animation-name:driftUpLeft; animation-duration:29s; animation-delay:-3s; opacity:0.6; --glow:0.15;"></span>
+    <span class="space-dot" style="left:30.15%; width:1px; height:1px; animation-name:driftUpRight; animation-duration:18s; animation-delay:0s; opacity:0.63; --glow:0.15;"></span>
+    <span class="space-dot" style="left:93.55%; width:1px; height:1px; animation-name:driftUpRight; animation-duration:16s; animation-delay:-22s; opacity:0.55; --glow:0.08;"></span>
+    <span class="space-dot" style="left:44.94%; width:3px; height:3px; animation-name:driftUpRight; animation-duration:19s; animation-delay:-16s; opacity:0.83; --glow:0.09;"></span>
+    <span class="space-dot" style="left:64.01%; width:1px; height:1px; animation-name:driftUpLeft; animation-duration:23s; animation-delay:-6s; opacity:0.76; --glow:0.1;"></span>
+    <span class="space-dot" style="left:82.59%; width:2px; height:2px; animation-name:driftUpLeft; animation-duration:28s; animation-delay:-10s; opacity:0.86; --glow:0.09;"></span>
+    <span class="space-dot" style="left:34.59%; width:2px; height:2px; animation-name:driftUp; animation-duration:23s; animation-delay:-7s; opacity:0.84; --glow:0.13;"></span>
+    <span class="space-dot" style="left:86.88%; width:2px; height:2px; animation-name:driftUpRight; animation-duration:28s; animation-delay:-24s; opacity:0.88; --glow:0.1;"></span>
+    <span class="space-dot" style="left:53.68%; width:3px; height:3px; animation-name:driftUp; animation-duration:22s; animation-delay:-3s; opacity:0.8; --glow:0.14;"></span>
+    <span class="space-dot" style="left:75.96%; width:3px; height:3px; animation-name:driftUpLeft; animation-duration:34s; animation-delay:-14s; opacity:0.66; --glow:0.1;"></span>
+    <span class="space-dot" style="left:22.97%; width:3px; height:3px; animation-name:driftUp; animation-duration:30s; animation-delay:-6s; opacity:0.88; --glow:0.16;"></span>
+    <span class="space-dot" style="left:25.66%; width:2px; height:2px; animation-name:driftUpLeft; animation-duration:25s; animation-delay:0s; opacity:0.85; --glow:0.16;"></span>
+    <span class="space-dot" style="left:17.93%; width:4px; height:4px; animation-name:driftUpLeft; animation-duration:30s; animation-delay:0s; opacity:0.64; --glow:0.12;"></span>
+    <span class="space-dot" style="left:89.17%; width:3px; height:3px; animation-name:driftUp; animation-duration:30s; animation-delay:-8s; opacity:0.96; --glow:0.1;"></span>
+    <span class="space-dot" style="left:71.24%; width:4px; height:4px; animation-name:driftUpLeft; animation-duration:21s; animation-delay:-21s; opacity:0.79; --glow:0.07;"></span>
+    <span class="space-dot" style="left:57.9%; width:2px; height:2px; animation-name:driftUpLeft; animation-duration:32s; animation-delay:-5s; opacity:0.84; --glow:0.07;"></span>
+    <span class="space-dot" style="left:75.83%; width:4px; height:4px; animation-name:driftUpLeft; animation-duration:29s; animation-delay:-14s; opacity:0.69; --glow:0.11;"></span>
+    <span class="space-dot" style="left:43.35%; width:3px; height:3px; animation-name:driftUpLeft; animation-duration:22s; animation-delay:0s; opacity:0.94; --glow:0.11;"></span>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" data-tab="home">PKD</a>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="nav" id="mainNav">
+        <button class="nav-link active" data-tab="home">Home</button>
+        <button class="nav-link" data-tab="about">About</button>
+        <button class="nav-link" data-tab="projects">Projects</button>
+        <button class="nav-link" data-tab="publications">Publications</button>
+        <button class="nav-link" data-tab="awards">Awards & Outreach</button>
+        <button class="nav-link" data-tab="education">Education</button>
+        <button class="nav-link" data-tab="travel">Conferences & Travel</button>
+        <button class="nav-link" data-tab="skills">Skills</button>
+        <button class="nav-link" data-tab="contact">Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <!-- HOME -->
+    <section id="home" class="tab-panel active">
+      <div class="home-hero">
+        <div class="home-copy">
+          <h1>Hi, I’m Pratyush Kumar Das</h1>
+          <p class="intro-line">I build data-driven solutions mainly for astrophysics and communicate complex ideas clearly.</p>
+          <p>I work with large scientific datasets from high-resolution observations and simulations in galactic astronomy to build tools, create clear visualisations, and uncover meaningful patterns.</p>
+        </div>
+
+        <div class="home-visual">
+          <div class="hero-photo-wrap" aria-label="Profile image with subtle decoration">
+            <div class="center-halo"></div>
+
+            <img
+              src="assets/profile-photo.jpg"
+              alt="Pratyush Kumar Das"
+              class="profile-photo"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+            />
+
+            <div class="photo-placeholder" style="display:none;">
+              <div>
+                <strong>Your Photo Here</strong>
+                <p>Add <code>assets/profile-photo.jpg</code></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="tab-panel">
+      <div class="about-layout">
+        <div class="about-side">
+          <article class="card about-tags-card">
+            <p class="about-eyebrow">Research Interests</p>
+            <div class="tags about-tags">
+              <span>Machine Learning</span>
+              <span>Galaxy Kinematics</span>
+              <span>Galaxy Morphology</span>
+              <span>IFU Spectroscopy</span>
+              <span>Simulation–Observation Bridging</span>
+              <span>Radio Follow-up for IFU Surveys</span>
+            </div>
+          </article>
+
+          <div class="about-text-flow">
+            <p>
+              I am an astrophysics PhD student at the University of Queensland working on galaxy structure, kinematics, and data-driven modelling.
+              My research combines large IFU spectroscopy surveys such as
+              <a href="https://sami-survey.org/" target="_blank" rel="noopener">SAMI</a>,
+              <a href="https://hector-aao.org/" target="_blank" rel="noopener">Hector</a>,
+              <a href="https://www.magpi-survey.org/" target="_blank" rel="noopener">MAGPI</a>, and
+              <a href="https://www.sdss.org/surveys/manga/" target="_blank" rel="noopener">MaNGA</a>
+              with modern simulations such as
+              <a href="https://simba.roe.ac.uk/" target="_blank" rel="noopener">Simba</a>,
+              <a href="https://www.illustris-project.org/" target="_blank" rel="noopener">Illustris</a>, and
+              <a href="https://eaglesim.org/" target="_blank" rel="noopener">EAGLE</a>.
+            </p>
+
+            <p>
+              I build tools and analysis workflows that connect observations, simulations, and machine learning, with a focus on clear
+              visualisation, reproducibility, and physically motivated modelling. My work often involves building robust pipelines for
+              large scientific datasets and turning complex results into interpretable outputs.
+            </p>
+
+            <p>
+              I also contribute to observational astronomy through Hector-related observing runs at the
+              <a href="https://www.aao.gov.au/about-us/AAT" target="_blank" rel="noopener">Anglo-Australian Telescope (AAT)</a>,
+              including on-site observing support and survey operations experience.
+            </p>
+
+            <p>
+              A central theme of my research is understanding how galaxy structure and internal motion co-evolve—especially how
+              rotation-curve shape, morphology, bulge fraction, and angular momentum vary across galaxy populations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="tab-panel">
+      <div class="projects-accordion">
+
+        <article class="card project-accordion-card is-open">
+          <button class="project-toggle" type="button" aria-expanded="true">
+            <span class="project-toggle-left">
+              <span class="project-icon" aria-hidden="true">🌀</span>
+              <span class="project-title-wrap">
+                <span class="project-title">Galaxy Angular Momentum Pipeline ("Spinny")</span>
+                <span class="project-subtitle">Kinematics • deprojection • cumulative j-profile</span>
+              </span>
+            </span>
+            <span class="project-chevron" aria-hidden="true">⌄</span>
+          </button>
+
+          <div class="project-content">
+            <div class="project-content-inner">
+              <p>
+                A pipeline for deriving galaxy angular momentum and related structural/kinematic measurements from IFU maps,
+                including density and velocity model fitting, deprojection, cumulative <em>j</em>-profile analysis, and quality flags.
+              </p>
+              <ul class="clean-list small-list">
+                <li>Rotation-curve modelling with MCMC (<code>emcee</code>)</li>
+                <li>Convergence diagnostics on cumulative <em>j</em> profiles</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project-accordion-card">
+          <button class="project-toggle" type="button" aria-expanded="false">
+            <span class="project-toggle-left">
+              <span class="project-icon" aria-hidden="true">🧩</span>
+              <span class="project-title-wrap">
+                <span class="project-title">SpaxelSleuth Data Products & FITS Export</span>
+                <span class="project-subtitle">Emission-line analysis • CSV → FITS workflows</span>
+              </span>
+            </span>
+            <span class="project-chevron" aria-hidden="true">⌄</span>
+          </button>
+
+          <div class="project-content">
+            <div class="project-content-inner">
+              <p>
+                Customising and extending SpaxelSleuth-style workflows for emission-line analysis, metallicity calculations,
+                and export of per-galaxy multi-extension FITS products from tabular data.
+              </p>
+              <ul class="clean-list small-list">
+                <li>Component-wise quantity grouping into FITS extensions</li>
+                <li>Custom CSV → FITS export logic with explicit column control</li>
+                <li>Data cleaning/filtering for invalid pixel coordinates</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project-accordion-card">
+          <button class="project-toggle" type="button" aria-expanded="false">
+            <span class="project-toggle-left">
+              <span class="project-icon" aria-hidden="true">🤖</span>
+              <span class="project-title-wrap">
+                <span class="project-title">Machine Learning on Simba Simulation</span>
+                <span class="project-subtitle">Classification + regression • halo-to-galaxy prediction</span>
+              </span>
+            </span>
+            <span class="project-chevron" aria-hidden="true">⌄</span>
+          </button>
+
+          <div class="project-content">
+            <div class="project-content-inner">
+              <p>
+                Predicting galaxy properties (stellar mass, HI mass, H<sub>2</sub> mass, SFR, metallicity) from dark-matter-only halo properties,
+                including central/satellite handling and star-forming vs quenched classification.
+              </p>
+              <ul class="clean-list small-list">
+                <li>Classification + regression pipeline design</li>
+                <li>Feature selection and Random Forest interpretability</li>
+                <li>Applications to intensity-mapping motivated science</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project-accordion-card">
+          <button class="project-toggle" type="button" aria-expanded="false">
+            <span class="project-toggle-left">
+              <span class="project-icon" aria-hidden="true">📐</span>
+              <span class="project-title-wrap">
+                <span class="project-title">Fundamental Plane Symbolic Regression</span>
+                <span class="project-subtitle">FP modelling • PySR equation discovery</span>
+              </span>
+            </span>
+            <span class="project-chevron" aria-hidden="true">⌄</span>
+          </button>
+
+          <div class="project-content">
+            <div class="project-content-inner">
+              <p>
+                Exploratory machine learning and symbolic regression for FP-like relations, including band-wise feature constraints,
+                observed vs simulation-direct parameters, and PySR-based equation discovery.
+              </p>
+              <ul class="clean-list small-list">
+                <li>Train/eval tracking and Hall-of-Fame parsing</li>
+                <li>Comparison of empirical and physically motivated forms</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="tab-panel">
+      <div class="pubs-layout">
+        <div class="pubs-header">
+          <p class="about-eyebrow">Publications</p>
+          <h2>Selected papers and ongoing manuscripts</h2>
+         
+        </div>
+
+        <div class="pubs-group">
+
+          <article class="card pub-card featured">
+            <div class="pub-top">
+              <div class="pub-meta-row">
+                <span class="pub-badge journal">MNRAS</span>
+                <span class="pub-badge year">2025</span>
+                <span class="pub-badge status published">Published</span>
+              </div>
+              <a class="pub-title-link" href="https://doi.org/10.1093/mnras/staf2096" target="_blank" rel="noopener">
+                Populating Galaxies into Haloes via Machine Learning on the Simba Simulation
+              </a>
+              <p class="pub-authors">Pratyush Kumar Das, Romeel Davé, Weiguang Cui</p>
+            </div>
+
+            <p class="pub-summary">
+              A machine-learning framework to populate dark matter haloes with galaxy properties in the Simba simulation,
+              including stellar mass, gas masses, star-formation rate, and metallicity.
+            </p>
+
+            <div class="pub-links">
+              <a href="https://doi.org/10.1093/mnras/staf2096" target="_blank" rel="noopener">DOI</a>
+              <a href="https://academic.oup.com/mnras/article/545/3/staf2096/8343316" target="_blank" rel="noopener">Journal page</a>
+            </div>
+          </article>
+
+          <article class="card pub-card">
+            <div class="pub-top">
+              <div class="pub-meta-row">
+                <span class="pub-badge journal">PASA</span>
+                <span class="pub-badge year">2025</span>
+                <span class="pub-badge status published">Published</span>
+              </div>
+              <a class="pub-title-link" href="https://doi.org/10.1017/pasa.2025.10106" target="_blank" rel="noopener">
+                Hector Galaxy Survey: Data processing, quality control, and early science
+              </a>
+              <p class="pub-authors">S. Oh et al. (including P. K. Das)</p>
+            </div>
+
+            <p class="pub-summary">
+              Hector survey data processing, quality-control diagnostics, and early-science validation, including reduction
+              and performance assessment workflows.
+            </p>
+
+            <div class="pub-links">
+              <a href="https://doi.org/10.1017/pasa.2025.10106" target="_blank" rel="noopener">DOI</a>
+              <a href="https://arxiv.org/abs/2509.25784" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </article>
+
+          <article class="card pub-card">
+            <div class="pub-top">
+              <div class="pub-meta-row">
+                <span class="pub-badge journal">PASA</span>
+                <span class="pub-badge year">2026</span>
+                <span class="pub-badge status published">Published / Accepted</span>
+              </div>
+              <a class="pub-title-link" href="https://arxiv.org/abs/2602.03088" target="_blank" rel="noopener">
+                The SAMI Galaxy Survey: Quenching of Star Formation in Clusters III. Ram-Pressure-Affected Galaxy Populations
+              </a>
+              <p class="pub-authors">O. Çakır et al. (including P. K. Das)</p>
+            </div>
+
+            <p class="pub-summary">
+              A SAMI cluster-galaxy study examining ram-pressure-affected populations and spatially resolved quenching trends
+              in dense environments.
+            </p>
+
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2602.03088" target="_blank" rel="noopener">arXiv</a>
+              <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260203088C/abstract" target="_blank" rel="noopener">ADS</a>
+            </div>
+          </article>
+        </div>
+
+        <article class="card pub-card draft">
+            <div class="pub-top">
+              <div class="pub-meta-row">
+                <span class="pub-badge journal">PASA</span>
+                <span class="pub-badge year">2025</span>
+                <span class="pub-badge status review">Under Review</span>
+              </div>
+
+              <div class="pub-title-static">
+                Hector Galaxy Survey: Linking the low- and high-mass ends of the Initial Mass Function in Star-Forming Galaxies
+              </div>
+
+              <p class="pub-authors">D. Salvador et al. (including P. K. Das)</p>
+            </div>
+
+            <p class="pub-summary">
+              Collaborative work on IMF constraints in star-forming galaxies using Hector integral-field spectroscopy.
+              Manuscript currently under review.
+            </p>
+        </article>
+
+          <article class="card pub-card draft">
+            <div class="pub-top">
+              <div class="pub-meta-row">
+                <span class="pub-badge journal">PASA</span>
+                <span class="pub-badge year">2026</span>
+                <span class="pub-badge status prep">In Preparation</span>
+              </div>
+              <div class="pub-title-static">
+                Morphology in Motion: Linking Angular Momentum to Galactic Structure in the SAMI Galaxy Survey
+              </div>
+              <p class="pub-authors">Pratyush Kumar Das and collaborators</p>
+            </div>
+            <p class="pub-summary">
+              Ongoing work connecting galaxy angular momentum, morphology, and structural diagnostics using IFU data,
+              with rotation-curve model selection and convergence/QC analysis.
+            </p>
+          </article>
+
+          <article class="card pub-card draft">
+            <div class="pub-top">
+              <div class="pub-meta-row">
+                <span class="pub-badge journal">ML / Astrophysics</span>
+                <span class="pub-badge year">2026</span>
+                <span class="pub-badge status prep">In Preparation</span>
+              </div>
+              <div class="pub-title-static">Fundamental Plane ML / Symbolic Regression (FP-ML)</div>
+              <p class="pub-authors">Yan Lai et al. (including P. K. Das)</p>
+            </div>
+            <p class="pub-summary">
+              Machine-learning and symbolic-regression exploration of Fundamental Plane-like relations using band-constrained
+              features and interpretable equations.
+            </p>
+          </article>
+        </div>
+
+        
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section id="awards" class="tab-panel">
+      <div class="awards-layout">
+        <div class="awards-header">
+          <p class="about-eyebrow">Awards & Outreach</p>
+          <h2>Scholarships, recognition, and community engagement</h2>
+          <p class="awards-intro">
+            A mix of academic funding, competition achievements, organising roles, and public outreach activities across astronomy and science communities.
+          </p>
+        </div>
+
+        <div class="grid two">
+          <article class="card awards-card">
+            <div class="section-chip-row">
+              <span class="section-chip">Scholarships & Awards</span>
+            </div>
+
+            <div class="award-list">
+              <div class="award-item featured">
+                <div class="award-year">2023–Present</div>
+                <div class="award-body">
+                  <h3>Research Training Program (RTP) Scholarship</h3>
+                  <p>University of Queensland — postgraduate research scholarship supporting PhD studies in astrophysics.</p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2016–2021</div>
+                <div class="award-body">
+                  <h3>INSPIRE Scholarship</h3>
+                  <p>MHRD, Government of India — awarded for the five-year integrated M.Sc. program.</p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2021</div>
+                <div class="award-body">
+                  <h3>1st Place — Physics Speed Quiz Competition (PSQC21)</h3>
+                  <p><a href="https://physeeks.com/psqc20-1/" target="_blank" rel="noopener">physeeks.com</a></p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2020</div>
+                <div class="award-body">
+                  <h3>3rd Place — Annual International Astronomy & Physics Competition (AIAPC20)</h3>
+                  <p><a href="https://physeeks.com/annual-international-astronomy-and-physics-competition-2020-aiapc20/" target="_blank" rel="noopener">Competition listing</a></p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2020</div>
+                <div class="award-body">
+                  <h3>Outstanding Performer — NAEST</h3>
+                  <p>National Anveshika Experimental Skills Test (<a href="https://www.concepts-of-physics.com/anveshika/naest-2020.php" target="_blank" rel="noopener">link</a>)</p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2020</div>
+                <div class="award-body">
+                  <h3>National-level Topper (Prelims) — ABHIPRAJNA 2020</h3>
+                  <p>IISER Tirupati (preliminary round recognition).</p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2016</div>
+                <div class="award-body">
+                  <h3>Certified Telescope Handler</h3>
+                  <p>International Olympiad on Astronomy and Astrophysics (IOAA) (<a href="https://www.ioaastrophysics.org/about-ioaa/" target="_blank" rel="noopener">about IOAA</a>)</p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2014–2016</div>
+                <div class="award-body">
+                  <h3>Pathani Samanta Mathematics Scholarship</h3>
+                  <p>Government of Odisha.</p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2011</div>
+                <div class="award-body">
+                  <h3>Gold Medal — International Mathematics Olympiad (SOF IMO)</h3>
+                  <p><a href="https://sofworld.org/imo" target="_blank" rel="noopener">SOF IMO</a></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card awards-card">
+            <div class="section-chip-row">
+              <span class="section-chip">Outreach, Service & Leadership</span>
+            </div>
+
+            <div class="award-list">
+              <div class="award-item featured soft">
+                <div class="award-year">2024</div>
+                <div class="award-body">
+                  <h3>Harley Wood School for Astronomy — Organising Committee</h3>
+                  <p>
+                    Helped organise and support the
+                    <a href="https://asa.astronomy.org.au/events/harley-wood-school/" target="_blank" rel="noopener">Harley Wood School for Astronomy</a>,
+                    a national astronomy school for postgraduate students across Australia.
+                  </p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">UQ</div>
+                <div class="award-body">
+                  <h3>Equity, Diversity & Inclusion Committee Member</h3>
+                  <p>
+                    School of Mathematics and Physics, The University of Queensland.
+                    <a href="https://smp.uq.edu.au/about/equity-diversity-inclusion" target="_blank" rel="noopener">UQ SMP EDI page</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="award-item featured soft">
+                <div class="award-year">UQ SMP</div>
+                <div class="award-body">
+                  <h3>Vice-President (Physics), Students of SMP Postgraduate Association (SOS)</h3>
+                  <p>
+                    Executive committee member of the School of Mathematics and Physics postgraduate student association at UQ,
+                    supporting community-building, student representation, and academic/social initiatives for HDR students.
+                    <a href="https://smp.uq.edu.au/students-smp-postgraduate-association-sos" target="_blank" rel="noopener">UQ SMP SOS page</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">Outreach</div>
+                <div class="award-body">
+                  <h3>“Ask an Expert” — Laura Street Festival</h3>
+                  <p>
+                    Public engagement activity answering astronomy questions and discussing space science with visitors.
+                    <a href="https://www.facebook.com/story.php/?id=100063605355414&story_fbid=1059396626190506" target="_blank" rel="noopener">Festival page/post</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">NISER</div>
+                <div class="award-body">
+                  <h3>NISER Astronomy Club — Core member</h3>
+                  <p>
+                    Supported telescope sessions, astronomy outreach events, and student-facing talks.
+                    <a href="https://www.niser.ac.in/" target="_blank" rel="noopener">NISER</a> ·
+                    <a href="https://astroclub-niser.github.io/" target="_blank" rel="noopener">NISER Astronomy Club</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">NISER</div>
+                <div class="award-body">
+                  <h3>Vice President, Zaariya Social Service Club</h3>
+                  <p>
+                    Contributed to education-focused outreach and social service activities. Mentored children from underprivileged
+                    communities through local outreach initiatives.
+                    <a href="https://www.niser.ac.in/" target="_blank" rel="noopener">NISER</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="award-item">
+                <div class="award-year">2017</div>
+                <div class="award-body">
+                  <h3>National-level Representation in Cricket</h3>
+                  <p>
+                    Represented
+                    <a href="https://www.niser.ac.in/" target="_blank" rel="noopener">NISER, India</a>
+                    at national level; achieved silver at the
+                    <a href="https://en.wikipedia.org/wiki/Inter_IISER_Sports_Meet" target="_blank" rel="noopener">Inter IISER Sports Meet (IISM)</a>
+                    in 2017.
+                    <a href="https://www.facebook.com/iism2017/" target="_blank" rel="noopener">IISM 2017 page</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="tab-panel">
+  <div class="edu-layout">
+    <div class="edu-header">
+
+    </div>
+
+    <!-- PhD -->
+    <article class="card edu-card featured">
+      <div class="edu-top">
+        <div class="edu-meta-row">
+          <span class="edu-badge level">PhD</span>
+          <span class="edu-badge year">2023–Present</span>
+          <span class="edu-badge status current">Current</span>
+        </div>
+
+        <h3>Ph.D. Candidate in Astrophysics</h3>
+        <p class="edu-place">
+          <a href="https://smp.uq.edu.au/" target="_blank" rel="noopener">School of Mathematics and Physics</a>,
+          <a href="https://www.uq.edu.au/" target="_blank" rel="noopener">The University of Queensland (UQ)</a>, Australia
+        </p>
+      </div>
+
+      <div class="edu-body">
+        <p>
+          Project: <em>Morphology in Motion: Linking Angular Momentum to Galactic Structure using Machine Learning</em>.
+        </p>
+        <p>
+          Research focuses on galaxy kinematics, morphology, angular momentum, IFU spectroscopy, and data-driven modelling.
+        </p>
+        <p class="edu-note">
+          Supervisors: Dr. Sarah Sweet, Dr. Holger Baumgardt, Dr. Simon Deeley
+        </p>
+      </div>
+    </article>
+
+    <!-- Single-column education list -->
+    <div class="edu-grid">
+      <!-- Research Assistant -->
+      <article class="card edu-card">
+        <div class="edu-top">
+          <div class="edu-meta-row">
+            <span class="edu-badge level">Research Assistant</span>
+            <span class="edu-badge year">2021–2023</span>
+          </div>
+          <h3>Research Assistant</h3>
+          <p class="edu-place">
+            <a href="https://ifa.roe.ac.uk/" target="_blank" rel="noopener">Institute for Astronomy, University of Edinburgh</a>, Scotland
+          </p>
+        </div>
+        <div class="edu-body">
+          <p>
+            Worked with Prof. Romeel Davé and Dr. Weiguang Cui on halo-to-galaxy machine learning on the Simba cosmological simulation, focusing on scalable analysis workflows and model development
+            for predicting galaxy properties from dark-matter halo information.
+          </p>
+        </div>
+      </article>
+
+
+      <!-- Integrated MSc -->
+      <article class="card edu-card">
+        <div class="edu-top">
+          <div class="edu-meta-row">
+            <span class="edu-badge level">Integrated M.Sc.</span>
+            <span class="edu-badge year">2016–2021</span>
+          </div>
+          <h3>Integrated M.Sc. in Physics</h3>
+          <p class="edu-place">
+            <a href="https://www.niser.ac.in/" target="_blank" rel="noopener">National Institute of Science Education and Research (NISER)</a>,
+            Odisha, India
+          </p>
+        </div>
+        <div class="edu-body">
+          <p>Minor: Computer Science</p>
+        </div>
+      </article>
+
+      <!-- Higher Secondary -->
+      <article class="card edu-card">
+        <div class="edu-top">
+          <div class="edu-meta-row">
+            <span class="edu-badge level">Higher Secondary</span>
+            <span class="edu-badge year">2014–2016</span>
+          </div>
+          <h3>Class 10+2 (CHSE, Odisha)</h3>
+          <p class="edu-place">Khallikote Junior College, Odisha, India</p>
+        </div>
+      </article>
+
+      <!-- Secondary -->
+      <article class="card edu-card">
+        <div class="edu-top">
+          <div class="edu-meta-row">
+            <span class="edu-badge level">Secondary</span>
+            <span class="edu-badge year">2014</span>
+          </div>
+          <h3>Class 10 (BSE, Odisha)</h3>
+          <p class="edu-place">Saraswati Shishu Vidya Mandir, Ramaharinagar, Odisha, India</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+    <!-- TRAVEL -->
+    <section id="travel" class="tab-panel">
+      <article class="card">
+        <h2>Conferences, Observing Runs & Travel</h2>
+        <p class="small-note">
+          Selected conferences, workshops, observing runs, and collaboration-related travel in chronological order.
+        </p>
+
+        <div class="award-list">
+          <div class="award-item featured soft">
+            <div class="award-year">2026</div>
+            <div class="award-body">
+              <h3>
+                <a href="https://www.kicc.cam.ac.uk/events/beyondhubble-revisiting-hubble-sequence-across-cosmic-time" target="_blank" rel="noopener">
+                  Beyond Hubble (Cambridge)
+                </a>
+              </h3>
+              <p>Planned conference participation focused on galaxy morphology and structural evolution across cosmic time.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">2026</div>
+            <div class="award-body">
+              <h3><a href="https://eatgalaxiesgroup.com.br/hub-2026/" target="_blank" rel="noopener">HUB2026 (Bahia, Brazil)</a></h3>
+              <p>Hack-week / collaboration event focused on computational prototyping, astronomy data workflows, and collaborative research development.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">2026</div>
+            <div class="award-body">
+              <h3><a href="https://astron-soc.in/asi2026/" target="_blank" rel="noopener">ASI 2026 (IIT Guwahati)</a></h3>
+              <p>44th Annual Meeting of the Astronomical Society of India — planned scientific participation and networking.</p>
+            </div>
+          </div>
+
+          <div class="award-item featured soft">
+            <div class="award-year">2026 / Ongoing</div>
+            <div class="award-body">
+              <h3><a href="https://aat.anu.edu.au/" target="_blank" rel="noopener">Anglo-Australian Telescope (AAT)</a> Observing Runs</h3>
+              <p>
+                Observing-run participation and coordination linked to Hector-related work, including on-site observing support,
+                data-quality checks, and survey workflows.
+                <a href="https://aat.anu.edu.au/technology/new-instruments/hector" target="_blank" rel="noopener">Hector instrument</a> ·
+                <a href="https://hector.survey.org.au/" target="_blank" rel="noopener">Hector Galaxy Survey</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">Ongoing</div>
+            <div class="award-body">
+              <h3>Hector / DR Collaboration Work</h3>
+              <p>
+                Ongoing contributions to survey pipeline/QC and collaboration tasks tied to the
+                <a href="https://hector.survey.org.au/" target="_blank" rel="noopener">Hector Galaxy Survey</a>.
+              </p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">2024</div>
+            <div class="award-body">
+              <h3>
+                <a href="https://asa.astronomy.org.au/events/harley-wood-school/" target="_blank" rel="noopener">
+                  Harley Wood School for Astronomy
+                </a>
+                — Organising Committee
+              </h3>
+              <p>Organising/support role for the Australian astronomy postgraduate school.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">2020</div>
+            <div class="award-body">
+              <h3><a href="https://cxc.harvard.edu/cdo/cxctds2020/" target="_blank" rel="noopener">Chandra Frontiers in Time-Domain Science</a></h3>
+              <p>Workshop participation (Center for Astrophysics | Harvard &amp; Smithsonian).</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">2020</div>
+            <div class="award-body">
+              <h3>5th International Conference on Particle Physics and Astrophysics</h3>
+              <p>Conference participation (listed in CV). Add the exact edition link later if you want.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">2020</div>
+            <div class="award-body">
+              <h3><a href="https://www.icts.res.in/program/peu" target="_blank" rel="noopener">Physics of the Early Universe (ICTS-TIFR, Bangalore)</a></h3>
+              <p>ICTS-TIFR program/workshop participation.</p>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">2019</div>
+            <div class="award-body">
+              <h3><a href="https://web.iucaa.in/~rpl/WinterSchool.html" target="_blank" rel="noopener">Radio Astronomy Winter School (IUCAA, Pune)</a></h3>
+              <p>Radio astronomy training school participation.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="tab-panel">
+      <div class="skills-layout">
+        <article class="card">
+          <h2>Skills</h2>
+          <p class="small-note">
+            Technical skills across scientific programming, astronomy data analysis, machine learning, visualisation, and research workflows.
+          </p>
+
+          <p>
+            I build research-grade analysis pipelines and tools for large scientific datasets, especially in astronomy. My work includes
+            data cleaning and validation, modelling workflows, uncertainty propagation, quality-control diagnostics, and publication-ready
+            visual outputs. I also work on bridging simulations and observations using machine learning and physically motivated analysis,
+            with a strong focus on reproducibility and clear interpretation.
+          </p>
+
+          <div class="skills-stack">
+            <div class="skills-block">
+              <p class="skills-label">Programming & Core Tools</p>
+              <div class="tags">
+                <span><a href="https://www.python.org/" target="_blank" rel="noopener">Python</a></span>
+                <span><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></span>
+                <span><a href="https://jupyter.org/" target="_blank" rel="noopener">Jupyter Notebook</a></span>
+                <span><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a></span>
+                <span><a href="https://www.linux.org/" target="_blank" rel="noopener">Linux</a></span>
+                <span><a href="https://www.gnu.org/software/bash/" target="_blank" rel="noopener">Bash</a></span>
+                <span><a href="https://slurm.schedmd.com/" target="_blank" rel="noopener">Slurm (HPC)</a></span>
+                <span><a href="https://www.latex-project.org/" target="_blank" rel="noopener">LaTeX</a></span>
+                <span><a href="https://www.overleaf.com/" target="_blank" rel="noopener">Overleaf</a></span>
+              </div>
+            </div>
+
+            <div class="skills-block">
+              <p class="skills-label">Scientific Python & Data Analysis</p>
+              <div class="tags">
+                <span><a href="https://numpy.org/" target="_blank" rel="noopener">NumPy</a></span>
+                <span><a href="https://pandas.pydata.org/" target="_blank" rel="noopener">pandas</a></span>
+                <span><a href="https://scipy.org/" target="_blank" rel="noopener">SciPy</a></span>
+                <span><a href="https://matplotlib.org/" target="_blank" rel="noopener">matplotlib</a></span>
+                <span><a href="https://www.astropy.org/" target="_blank" rel="noopener">Astropy</a></span>
+                <span><a href="https://www.h5py.org/" target="_blank" rel="noopener">h5py</a></span>
+                <span><a href="https://scikit-learn.org/" target="_blank" rel="noopener">scikit-learn</a></span>
+              </div>
+            </div>
+
+            <div class="skills-block">
+              <p class="skills-label">Statistics, Modelling & ML</p>
+              <div class="tags">
+                <span>Random Forests</span>
+                <span>Classification & Regression</span>
+                <span>Feature Selection</span>
+                <span><a href="https://emcee.readthedocs.io/" target="_blank" rel="noopener">MCMC (emcee)</a></span>
+                <span>Monte Carlo Uncertainty Propagation</span>
+                <span>Model Comparison (AIC/BIC/WAIC)</span>
+                <span><a href="https://github.com/MilesCranmer/PySR" target="_blank" rel="noopener">PySR (Symbolic Regression)</a></span>
+                <span><a href="https://autokeras.com/" target="_blank" rel="noopener">AutoKeras</a></span>
+                <span><a href="https://automl.github.io/auto-sklearn/master/" target="_blank" rel="noopener">AutoSklearn</a></span>
+              </div>
+            </div>
+
+            <div class="skills-block">
+              <p class="skills-label">Astronomy Data & Research Workflows</p>
+              <div class="tags">
+                <span>IFU Spectroscopy</span>
+                <span>Galaxy Kinematics</span>
+                <span>Galaxy Morphology</span>
+                <span>Rotation Curve Fitting</span>
+                <span>Angular Momentum Analysis</span>
+                <span>Emission-line Analysis</span>
+                <span>Metallicity Diagnostics</span>
+                <span>FITS / CSV Data Products</span>
+                <span>Survey QC Diagnostics</span>
+                <span>Observations & Instrument Workflows</span>
+                <span>End-to-end Analysis</span>
+                <span>Debugging Complex Pipelines</span>
+                <span>Scientific Reproducibility</span>
+                <span>HPC-ready Workflows</span>
+                <span>Method Development</span>
+              </div>
+            </div>
+
+            <div class="skills-block">
+              <p class="skills-label">Survey & Simulation Ecosystems (Worked With)</p>
+              <div class="tags">
+                <span><a href="https://sami-survey.org/" target="_blank" rel="noopener">SAMI</a></span>
+                <span><a href="https://hector.survey.org.au/" target="_blank" rel="noopener">Hector</a></span>
+                <span><a href="https://www.magpi-survey.org/" target="_blank" rel="noopener">MAGPI</a></span>
+                <span><a href="https://www.sdss.org/surveys/manga/" target="_blank" rel="noopener">MaNGA</a></span>
+                <span><a href="https://simba.roe.ac.uk/" target="_blank" rel="noopener">Simba</a></span>
+                <span><a href="https://www.tng-project.org/" target="_blank" rel="noopener">IllustrisTNG</a></span>
+                <span><a href="https://www.illustris-project.org/" target="_blank" rel="noopener">Illustris</a></span>
+                <span><a href="https://eaglesim.org/" target="_blank" rel="noopener">EAGLE</a></span>
+                <span>Caesar Catalogs</span>
+              </div>
+            </div>
+
+            <div class="skills-block">
+              <p class="skills-label">Visualisation, Reporting & Communication</p>
+              <div class="tags">
+                <span>Publication-ready Figures</span>
+                <span>Scientific Plot Styling</span>
+                <span>Poster / Presentation Design</span>
+                <span>Technical Writing</span>
+                <span>Research Documentation</span>
+                <span>Reproducible Notebooks</span>
+                <span>Collaborative Drafting</span>
+                <span>Cross-team Collaboration</span>
+                <span>Data Visual Storytelling</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT (PLAIN, NO CARDS) -->
+    <section id="contact" class="tab-panel">
+      <div class="contact-plain">
+        <h2>Contact</h2>
+        <p class="small-note">Public contact details</p>
+
+        <ul class="contact-plain-list">
+          <li>
+            <strong>Name</strong>
+            <span>Pratyush Kumar Das</span>
+          </li>
+          <li>
+            <strong>Affiliation</strong>
+            <span>
+              <a href="https://smp.uq.edu.au/" target="_blank" rel="noopener">School of Mathematics and Physics</a>,
+              <a href="https://www.uq.edu.au/" target="_blank" rel="noopener">The University of Queensland (UQ)</a>
+            </span>
+          </li>
+          <li>
+            <strong>Email</strong>
+            <span><a href="mailto:p.das@uq.edu.au">p.das@uq.edu.au</a></span>
+          </li>
+          <li>
+            <strong>GitHub</strong>
+            <span><a href="https://github.com/pkd-45" target="_blank" rel="noopener">github.com/pkd-45</a></span>
+          </li>
+          <li>
+            <strong>ORCID</strong>
+            <span><a href="https://orcid.org/0000-0002-4326-8598" target="_blank" rel="noopener">orcid.org/0000-0002-4326-8598</a></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Pratyush Kumar Das • Built for GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
